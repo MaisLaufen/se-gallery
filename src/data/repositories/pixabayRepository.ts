@@ -22,12 +22,18 @@ export const PixabayRepository = {
       },
     });
 
-    return res.data.hits.map((hit) => ({
-      id: hit.id.toString(),
-      imageUrl: hit.webformatURL,
-      tags: hit.tags,
-      views: hit.views,
-      likes: hit.likes,
-    }));
+    return res.data.hits.map((hit) => {
+      const mapped = {
+        id: hit.id.toString(),
+        imageUrl: hit.webformatURL,
+        tags: hit.tags,
+        views: hit.views,
+        likes: hit.likes,
+      };
+
+      console.log('Hit:', mapped); // TODO: delete this in prod
+
+      return mapped;
+    });
   },
 };
