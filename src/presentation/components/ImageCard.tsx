@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     aspectRatio: 1,
+    margin: 2,
     overflow: 'hidden',
     backgroundColor: '#eee',
     position: 'relative',

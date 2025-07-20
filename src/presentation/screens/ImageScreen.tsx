@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: screenWidth,
-    aspectRatio: 1, // квадрат, как в Instagram
-    borderRadius: 8,
+    aspectRatio: 1,
   },
   infoRow: {
     flexDirection: 'row',
