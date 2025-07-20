@@ -44,9 +44,8 @@ export const ImageGrid = ({ images, loadingMore, onEndReached, navigation }: Pro
 
 const styles = StyleSheet.create({
   list: {
-    padding: 8,
-    gap: 8,
-    paddingBottom: 16,
+    padding: 2,
+    gap: 1,
   },
   row: {
     justifyContent: 'space-between',
