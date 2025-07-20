@@ -45,7 +45,7 @@ export const GalleryScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AppBar></AppBar>
+      <AppBar onRefresh={function (): void {} }></AppBar>
       <View style={styles.flex}>
         <ImageGrid images={images} loadingMore={loading} onEndReached={() => {}} navigation={navigation}/>
       </View>
