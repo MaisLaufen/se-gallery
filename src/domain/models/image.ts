@@ -1,4 +1,4 @@
-export interface Image {
+export interface ImageModel {
   id: string;
   imageUrl: string;
   tags: string;

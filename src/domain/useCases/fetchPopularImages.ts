@@ -1,6 +1,6 @@
 import { PixabayRepository } from '../../data/repositories/pixabayRepository';
-import { Image } from '../models/image';
+import { ImageModel } from '../models/image';
 
-export const fetchPopularImages = async (): Promise<Image[]> => {
-  return await PixabayRepository.fetchPopularImages();
+export const fetchPopularImages = (page: number = 1, limit: number = 12) => {
+  return PixabayRepository.fetchPopularImages(limit, page);
 };
