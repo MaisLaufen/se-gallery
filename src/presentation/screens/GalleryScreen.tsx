@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../domain/navigation/navigation';
 import { FilterModal } from '../modals/FilterModal';
+import { ErrorModal } from '../modals/ErrorModal';
 
 const IMAGES_PER_PAGE = 30;
 
@@ -22,6 +23,7 @@ export const GalleryScreen = () => {
   const [images, setImages] = useState<ImageModel[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [query, setQuery] = useState('');
   const [filterVisible, setFilterVisible] = useState(false);
@@ -51,8 +53,15 @@ const toggleColor = (color: string) => {
       });
       setImages((prev) => (reset ? newImages : [...prev, ...newImages]));
       setPage((prev) => (reset ? 2 : prev + 1));
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
+      if (e?.response?.status === 400 || e?.status === 400) {
+        setError('Кажется, у вас отсутствует интернет или сервис не доступен в вашей стране. Если так - попробуйте включить VPN.');
+      } else if (e?.message) {
+        setError(e.message);
+      } else {
+        setError('Произошла неизвестная ошибка.');
+      }
     } finally {
       setLoading(false);
     }
@@ -84,8 +93,13 @@ const toggleColor = (color: string) => {
   onToggleSortOrder={toggleSortOrder}
 />
       <View style={styles.flex}>
-        <ImageGrid images={images} loadingMore={loading} onEndReached={() => {}} navigation={navigation}/>
+        <ImageGrid images={images} loadingMore={loading} navigation={navigation}/>
       </View>
+      <ErrorModal
+        visible={!!error}
+        message={error}
+        onClose={() => setError(null)}
+      />
     </SafeAreaView>
   );
 };
