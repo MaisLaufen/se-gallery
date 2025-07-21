@@ -5,27 +5,40 @@ import { MenuDrawer } from './MenuDrawer';
 import * as Icon from "react-native-feather";
 import { HeaderLogo } from './HeaderLogo';
 
-export const AppBar = ({ onRefresh }: { onRefresh: () => void }) => {
+export const AppBar = ({
+  onRefresh,
+  searchValue,
+  onSearchChange,
+  onSearchSubmit,
+  onFilterPress,
+}: {
+  onRefresh: () => void;
+  searchValue: string;
+  onSearchChange: (text: string) => void;
+  onSearchSubmit: () => void;
+  onFilterPress: () => void;
+}) => {
   const [menuVisible, setMenuVisible] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuVisible((prev) => !prev);
-  };
 
   return (
     <>
-        <HeaderLogo />
+      <HeaderLogo />
       <View style={styles.container}>
         <TouchableOpacity onPress={onRefresh}>
-            <Icon.RefreshCw color="white" width={32} />
+          <Icon.RefreshCw color="white" width={32} />
         </TouchableOpacity>
-        <SearchBar />
-        <TouchableOpacity onPress={toggleMenu}>
+        <SearchBar
+          value={searchValue}
+          onChangeText={onSearchChange}
+          onSubmit={onSearchSubmit}
+          onFilterPress={onFilterPress}
+        />
+        <TouchableOpacity onPress={() => setMenuVisible((v) => !v)}>
           <Icon.MoreVertical color="white" width={32} />
         </TouchableOpacity>
       </View>
-<MenuDrawer visible={menuVisible} onClose={() => setMenuVisible(false)} />
-      </>
+      <MenuDrawer visible={menuVisible} onClose={() => setMenuVisible(false)} />
+    </>
   );
 };
 
