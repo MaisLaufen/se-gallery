@@ -7,24 +7,46 @@ const api = axios.create({
   baseURL: Config.API_URL,
 });
 
+interface FetchImagesParams {
+  limit?: number;
+  page?: number;
+  q?: string;
+  colors?: string[]; // ['red', 'yellow', etc]
+  order?: 'popular' | 'latest';
+}
+
 export const PixabayRepository = {
-  async fetchPopularImages(limit = 12, page = 1): Promise<ImageModel[]> {
-    const res = await api.get<ImageResponse>('/', {
+  async fetchImages(params: FetchImagesParams = {}): Promise<ImageModel[]> {
+    const {
+      limit = 30,
+      page = 1,
+      q,
+      colors,
+      order = 'popular',
+    } = params;
+
+    const response = await api.get<ImageResponse>('/', {
       params: {
         key: Config.API_KEY,
         per_page: limit,
         page,
-        order: 'popular',
+        order,
+        q: q || '',
+        colors: colors?.join(','),
         image_type: 'photo',
       },
     });
 
-    return res.data.hits.map((hit) => ({
+    return response.data.hits.map((hit) => ({
       id: hit.id.toString(),
       imageUrl: hit.webformatURL,
       tags: hit.tags,
       views: hit.views,
       likes: hit.likes,
     }));
+  },
+
+  async fetchPopularImages(limit = 30, page = 1): Promise<ImageModel[]> {
+    return this.fetchImages({ limit, page, order: 'popular' });
   },
 };
