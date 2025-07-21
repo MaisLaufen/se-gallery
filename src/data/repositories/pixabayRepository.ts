@@ -29,8 +29,8 @@ export const PixabayRepository = {
       params: {
         key: Config.API_KEY,
         per_page: limit,
-        page,
-        order,
+        page: page,
+        order: order,
         q: q || '',
         colors: colors?.join(','),
         image_type: 'photo',
