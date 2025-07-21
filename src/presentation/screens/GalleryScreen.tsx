@@ -60,12 +60,11 @@ const toggleColor = (color: string) => {
 
     const onSearchSubmit = () => {
     loadImages(true);
+    };
 
   useEffect(() => {
     loadImages(true);
   }, [selectedColors, sortOrder]);
-  
-};
 
   return (
     <SafeAreaView style={styles.container}>
