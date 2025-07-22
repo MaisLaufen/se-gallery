@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modal: {
-    backgroundColor: Theme.primaryModalColor,
+    backgroundColor: Theme.primaryColor,
     width: '90%',
     borderRadius: 10,
     padding: 16,
@@ -22,10 +22,10 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: Theme.placeholderColor,
+    color: Theme.secondaryColor,
   },
   close: {
-    color: Theme.like,
+    color: Theme.error,
   },
   section: {
     marginVertical: 10,
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
   subtitle: {
     fontWeight: 'bold',
     marginBottom: 8,
-    color: Theme.primaryColor
+    color: Theme.placeholderColor
   },
   colorItem: {
     padding: 8,
@@ -41,12 +41,52 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
   },
-  colorItemSelected: {
-    backgroundColor: Theme.href,
-  },
   sortToggle: {
     padding: 10,
     borderWidth: 1,
     borderRadius: 6,
   },
+  colorCircleWrapper: {
+  padding: 6,
+  marginRight: 10,
+  borderRadius: 20,
+  borderWidth: 2,
+  borderColor: 'transparent',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+colorCircleWrapperSelected: {
+  borderColor: Theme.tertiaryColor,
+},
+colorCircle: {
+  width: 30,
+  height: 30,
+  borderRadius: 15,
+  borderWidth: 1,
+  borderColor: Theme.secondaryColor,
+},
+
+sortToggleGroup: {
+  flexDirection: 'row',
+  borderRadius: 6,
+  overflow: 'hidden',
+  borderWidth: 1,
+  borderColor: Theme.secondaryColor,
+},
+sortToggleButton: {
+  flex: 1,
+  paddingVertical: 10,
+  alignItems: 'center',
+  backgroundColor: Theme.primaryColor,
+},
+sortToggleSelected: {
+  backgroundColor: Theme.tertiaryColor,
+},
+sortToggleSelectedText: {
+    color: Theme.primaryColor
+},
+sortToggleText: {
+  color: Theme.secondaryColor,
+  fontWeight: '600',
+},
 });

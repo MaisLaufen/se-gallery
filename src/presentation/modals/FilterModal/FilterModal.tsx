@@ -14,6 +14,23 @@ const COLORS = [
   'white', 'gray', 'black', 'brown',
 ];
 
+const colorMap: Record<string, string> = {
+  grayscale: '#A0A0A0',
+  transparent: 'transparent',
+  red: '#FF3B30',
+  orange: '#FF9500',
+  yellow: '#FFCC00',
+  green: '#34C759',
+  turquoise: '#5AC8FA',
+  blue: '#007AFF',
+  lilac: '#AF52DE',
+  pink: '#FF2D55',
+  white: '#FFFFFF',
+  gray: '#8E8E93',
+  black: '#000000',
+  brown: '#A2845E',
+};
+
 type Props = {
   visible: boolean;
   selectedColors: string[];
@@ -42,30 +59,66 @@ export const FilterModal = ({
             </TouchableOpacity>
           </View>
 
-          <View style={styles.section}>
+            <View style={styles.section}>
             <Text style={styles.subtitle}>Цвета</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {COLORS.map((color) => (
+                {COLORS.map((color) => (
                 <TouchableOpacity
-                  key={color}
-                  onPress={() => onToggleColor(color)}
-                  style={[
-                    styles.colorItem,
-                    selectedColors.includes(color) && styles.colorItemSelected,
-                  ]}
+                    key={color}
+                    onPress={() => onToggleColor(color)}
+                    style={[
+                    styles.colorCircleWrapper,
+                    selectedColors.includes(color) && styles.colorCircleWrapperSelected,
+                    ]}
                 >
-                  <Text style={{color: 'black'}}>{color}</Text>
+                    <View
+                    style={[
+                        styles.colorCircle,
+                        { backgroundColor: colorMap[color] ?? 'gray' },
+                    ]}
+                    />
                 </TouchableOpacity>
-              ))}
+                ))}
             </ScrollView>
-          </View>
+            </View>
 
-          <View style={styles.section}>
+            <View style={styles.section}>
             <Text style={styles.subtitle}>Сортировка</Text>
-            <TouchableOpacity onPress={onToggleSortOrder} style={styles.sortToggle}>
-              <Text style={{color: 'black'}}>Сейчас: {sortOrder === 'popular' ? 'Популярные' : 'Новые'}</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={styles.sortToggleGroup}>
+                <TouchableOpacity
+                style={[
+                    styles.sortToggleButton,
+                    sortOrder === 'popular' && styles.sortToggleSelected,
+                ]}
+                onPress={() => sortOrder !== 'popular' && onToggleSortOrder()}
+                >
+                <Text
+                    style={[
+                    styles.sortToggleText,
+                    sortOrder === 'popular' && styles.sortToggleSelectedText,
+                    ]}
+                >
+                    Популярные
+                </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                style={[
+                    styles.sortToggleButton,
+                    sortOrder === 'latest' && styles.sortToggleSelected,
+                ]}
+                onPress={() => sortOrder !== 'latest' && onToggleSortOrder()}
+                >
+                <Text
+                    style={[
+                    styles.sortToggleText,
+                    sortOrder === 'latest' && styles.sortToggleSelectedText,
+                    ]}
+                >
+                    Новые
+                </Text>
+                </TouchableOpacity>
+            </View>
+            </View>
         </View>
       </View>
     </Modal>
