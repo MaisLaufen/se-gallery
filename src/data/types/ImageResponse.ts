@@ -5,5 +5,7 @@ export interface ImageResponse {
     tags: string;
     likes: number;
     views: number;
+    user: string;
+    userImageURL: string;
   }[];
 }

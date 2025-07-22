@@ -24,6 +24,8 @@ export const PixabayRepository = {
       colors,
       order = 'popular',
     } = params;
+    // console.log('repo page: \n');
+    // console.log(page);
 
     const response = await api.get<ImageResponse>('/', {
       params: {
@@ -43,6 +45,8 @@ export const PixabayRepository = {
       tags: hit.tags,
       views: hit.views,
       likes: hit.likes,
+      user: hit.user,
+      userImageURL: hit.userImageURL
     }));
   },
 

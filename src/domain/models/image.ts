@@ -4,4 +4,6 @@ export interface ImageModel {
   tags: string;
   likes: number;
   views: number;
+  user: string;
+  userImageURL: string;
 }
