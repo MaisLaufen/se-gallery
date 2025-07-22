@@ -58,13 +58,11 @@ const toggleColor = (color: string) => {
 
       setImages((prev) => (reset ? newImages : [...prev, ...newImages]));
     } catch (e: any) {
-      console.error(e);
-      if (e?.response?.status === 400 || e?.status === 400) {
-        setError('Кажется, у вас отсутствует интернет или сервис не доступен в вашей стране. Если так - попробуйте включить VPN.');
-      } else if (e?.message) {
-        setError(e.message);
-      } else {
-        setError('Произошла неизвестная ошибка.');
+      if (e.message == 'Network Error') {
+        setError('Кажется, у вас нет интернета или сервис недоступен в вашей стране. Если так, воспользуйтесь VPN.')
+      }
+      else {
+        setError(`Произошла неизвестная ошибка: ${e.message}`);
       }
     } finally {
       setLoading(false);
