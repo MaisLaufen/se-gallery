@@ -1,20 +1,13 @@
 import { Palette } from './palette';
 
 export const Theme = {
-    
+
     // Main colors:
     primaryColor: Palette.black,
     secondaryColor: Palette.white,
     tertiaryColor: Palette.yellow,
-
-    // Text colors:
-    textPrimary: Palette.black,
-    textSecondary: Palette.white,
-    textHref: Palette.blue,
-
-    // Icon colors:
-    iconPrimary: Palette.black,
-    iconSecondary: Palette.white,
+    transparentBlack: Palette.transparentBlack,
+    placeholderColor: Palette.darkWhite,
 
     // Modal colors:
     primaryModalColor: Palette.darkGray,
@@ -23,4 +16,6 @@ export const Theme = {
     // Info colors:
     error: Palette.red,
     like: Palette.cuteRed,
+    info: Palette.lightGray,
+    href: Palette.blue
 };

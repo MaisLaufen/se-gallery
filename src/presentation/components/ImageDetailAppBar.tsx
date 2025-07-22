@@ -17,7 +17,7 @@ export const ImageDetailAppBar = ({ imageId }: Props) => {
     <>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon.ArrowLeft color={Theme.iconSecondary} width={32} />
+          <Icon.ArrowLeft color={Theme.secondaryColor} width={32} />
         </TouchableOpacity>
 
         <Text style={styles.title}>Photo №{imageId}</Text>
