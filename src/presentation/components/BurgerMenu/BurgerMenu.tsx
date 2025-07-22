@@ -11,7 +11,7 @@ import { styles } from './styles';
 import * as Icon from "react-native-feather";
 import { Theme } from '../../theme';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 interface Props {
   visible: boolean;
