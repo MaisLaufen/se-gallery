@@ -28,6 +28,14 @@ export const MainScreen = () => {
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<'popular' | 'latest'>('popular');
 
+  const goToSettings = () => {
+    navigation.navigate('Settings');
+  };
+
+  const goToAbout = () => {
+    navigation.navigate('About');
+  };
+
 const toggleColor = (color: string) => {
       setPage(1);
     setSelectedColors((prev) =>
@@ -82,6 +90,8 @@ const toggleColor = (color: string) => {
         onSearchChange={setQuery}
         onSearchSubmit={onSearchSubmit}
         onFilterPress={() => setFilterVisible(true)}
+        onNavigateSettings={goToSettings}
+        onNavigateAbout={goToAbout}
       />
 <FilterModal
   visible={filterVisible}

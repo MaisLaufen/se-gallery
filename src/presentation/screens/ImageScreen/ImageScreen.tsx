@@ -1,4 +1,4 @@
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react';
@@ -10,11 +10,14 @@ import { AuthorOverlay } from '../../components/AuthorOverlay/AuthorOverlay';
 import * as Icon from "react-native-feather";
 import { styles } from './styles';
 import { Theme } from '../../theme';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type ImageDetailRouteProp = RouteProp<RootStackParamList, 'Image'>;
+type Navigation = NativeStackNavigationProp<RootStackParamList>;
 
 export const ImageScreen = () => {
   const route = useRoute<ImageDetailRouteProp>();
+  const navigation = useNavigation<Navigation>();
   const { image } = route.params;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,7 +26,10 @@ export const ImageScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1}}>
       <HeaderLogo />
-      <SecondaryAppBar appBarText={`Photo №${image.id}`}></SecondaryAppBar>
+      <SecondaryAppBar
+        appBarText={`Photo №${image.id}`}
+        onNavigateSettings={() => navigation.navigate('Settings')}
+        onNavigateAbout={() => navigation.navigate('About')}/>
 
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         <Image

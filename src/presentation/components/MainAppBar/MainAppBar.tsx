@@ -13,12 +13,16 @@ export const MainAppBar = ({
   onSearchChange,
   onSearchSubmit,
   onFilterPress,
+  onNavigateSettings,
+  onNavigateAbout,
 }: {
   onRefresh: () => void;
   searchValue: string;
   onSearchChange: (text: string) => void;
   onSearchSubmit: () => void;
   onFilterPress: () => void;
+  onNavigateSettings: () => void;
+  onNavigateAbout: () => void;
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -39,7 +43,10 @@ export const MainAppBar = ({
           <Icon.MoreVertical color={Theme.tertiaryColor} width={32} />
         </TouchableOpacity>
       </View>
-      <BurgerMenu visible={menuVisible} onClose={() => setMenuVisible(false)} />
+      <BurgerMenu visible={menuVisible}
+       onClose={() => setMenuVisible(false)}
+       onNavigateSettings={onNavigateSettings}
+       onNavigateAbout={onNavigateAbout}/>
     </>
   );
 };
