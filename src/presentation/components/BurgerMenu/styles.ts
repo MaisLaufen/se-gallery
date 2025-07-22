@@ -1,34 +1,41 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { Theme } from "../../theme";
+
+const { height, width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    width,
+    height,
+    top: 0,
+    left: 0,
     flexDirection: 'row',
     zIndex: 100,
   },
   backdrop: {
     flex: 1,
-    backgroundColor: Theme.transparentBlack, // затемнение и блокировка фона
+    backgroundColor: Theme.transparentBlack,
   },
   drawer: {
-    width: '60%', //width * 0.6, TODO: fix
-    height: '100%',
+    width: width,
     backgroundColor: Theme.primaryColor,
     padding: 16,
-    position: 'absolute',
-    top: 0,
+    justifyContent: 'flex-start',
   },
-  text: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 16,
+  header: {
+    marginBottom: 24,
   },
-  closeButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: Theme.secondaryColor,
-    alignSelf: 'flex-start',
-    borderRadius: 6,
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+  menuIcon: {
+    marginRight: 12,
+  },
+  menuText: {
+    fontSize: 16,
+    color: Theme.secondaryColor,
   }
 });

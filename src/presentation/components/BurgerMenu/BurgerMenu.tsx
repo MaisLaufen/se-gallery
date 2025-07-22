@@ -8,15 +8,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { styles } from './styles';
+import * as Icon from "react-native-feather";
+import { Theme } from '../../theme';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface Props {
   visible: boolean;
   onClose: () => void;
+  onNavigateSettings: () => void;
+  onNavigateAbout: () => void;
 }
 
-export const BurgerMenu = ({ visible, onClose }: Props) => {
+export const BurgerMenu = ({
+  visible,
+  onClose,
+  onNavigateSettings,
+  onNavigateAbout,
+}: Props) => {
   const slideAnim = useRef(new Animated.Value(width)).current;
 
   useEffect(() => {
@@ -44,9 +53,20 @@ export const BurgerMenu = ({ visible, onClose }: Props) => {
       </TouchableWithoutFeedback>
 
       <Animated.View style={[styles.drawer, { left: slideAnim }]}>
-        <Text style={styles.text}>Меню заглушка</Text>
-        <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-          <Text>Закрыть</Text>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={onClose}>
+            <Icon.ArrowLeft width={24} color={Theme.secondaryColor} />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.menuItem} onPress={onNavigateSettings}>
+          <Icon.Settings width={20} color={Theme.secondaryColor} style={styles.menuIcon} />
+          <Text style={styles.menuText}>Настройки</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.menuItem} onPress={onNavigateAbout}>
+          <Icon.Info width={20} color={Theme.secondaryColor} style={styles.menuIcon} />
+          <Text style={styles.menuText}>О приложении</Text>
         </TouchableOpacity>
       </Animated.View>
     </View>
