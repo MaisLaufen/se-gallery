@@ -57,3 +57,10 @@
    npm install
    npx react-native run-android
    ```
+
+## Используемые SDK
+
+- Android SDK: 35
+- React Native: 0.80.1
+- JDK: 17.0.12
+- NDK: 29.0.13599879
