@@ -31,11 +31,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     lineHeight: 20,
+    color: Theme.primaryColor
   },
   modalMessage: {
     fontSize: 16,
     marginBottom: 24,
     textAlign: 'center',
+    color: Theme.primaryColor
   },
   modalButton: {
     backgroundColor: Theme.error,
