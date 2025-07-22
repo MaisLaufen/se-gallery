@@ -15,13 +15,14 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../domain/navigation/navigation';
 import { FilterModal } from '../modals/FilterModal';
 import { ErrorModal } from '../modals/ErrorModal';
+import { PaginationBar } from '../components/NavigationBar';
 
 const IMAGES_PER_PAGE = 30;
 
 export const GalleryScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [images, setImages] = useState<ImageModel[]>([]);
-  const [page, setPage] = useState(1);
+  const [currentPage, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,16 +44,18 @@ const toggleColor = (color: string) => {
   const loadImages = async (reset = false) => {
     if (loading) return;
     setLoading(true);
+    console.log('Curr page: \n');
+    console.log(currentPage);
     try {
       const newImages = await fetchFilteredImages({
         query: query,
         colors: selectedColors,
         order: sortOrder,
-        page: reset ? 1 : page,
+        page: currentPage,
         limit: IMAGES_PER_PAGE,
       });
+
       setImages((prev) => (reset ? newImages : [...prev, ...newImages]));
-      setPage((prev) => (reset ? 2 : prev + 1));
     } catch (e: any) {
       console.error(e);
       if (e?.response?.status === 400 || e?.status === 400) {
@@ -68,12 +71,12 @@ const toggleColor = (color: string) => {
   };
 
     const onSearchSubmit = () => {
-    loadImages(true);
+    setPage(1);
     };
 
   useEffect(() => {
     loadImages(true);
-  }, [selectedColors, sortOrder]);
+  }, [selectedColors, sortOrder, currentPage ]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,7 +96,10 @@ const toggleColor = (color: string) => {
   onToggleSortOrder={toggleSortOrder}
 />
       <View style={styles.flex}>
-        <ImageGrid images={images} loadingMore={loading} navigation={navigation}/>
+        <ImageGrid images={images} loadingMore={loading} onImagePress={(image) => navigation.navigate('ImageDetail', { image })}/>
+        <PaginationBar currentPage={currentPage} onPageChange={(newPage) => {
+            setPage(newPage);
+          }}></PaginationBar>
       </View>
       <ErrorModal
         visible={!!error}
