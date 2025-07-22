@@ -20,7 +20,7 @@ export const ImageCard = ({ image, onPress }: Props) => {
     <Pressable style={styles.card} onPress={onPress}>
       {loading && (
         <View style={styles.loader}>
-          <ActivityIndicator size="small" color="#888" />
+          <ActivityIndicator size="small" color="yellow" />
         </View>
       )}
       <Image
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     margin: 2,
     overflow: 'hidden',
-    backgroundColor: '#eee',
+    backgroundColor: 'black',
     position: 'relative',
   },
   img: {

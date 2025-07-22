@@ -4,6 +4,7 @@ import { SearchBar } from './SearchBar';
 import { MenuDrawer } from './MenuDrawer';
 import * as Icon from "react-native-feather";
 import { HeaderLogo } from './HeaderLogo';
+import { Theme } from '../theme';
 
 export const AppBar = ({
   onRefresh,
@@ -25,7 +26,7 @@ export const AppBar = ({
       <HeaderLogo />
       <View style={styles.container}>
         <TouchableOpacity onPress={onRefresh}>
-          <Icon.RefreshCw color="white" width={32} />
+          <Icon.RotateCw color="white" width={32} />
         </TouchableOpacity>
         <SearchBar
           value={searchValue}
@@ -34,7 +35,7 @@ export const AppBar = ({
           onFilterPress={onFilterPress}
         />
         <TouchableOpacity onPress={() => setMenuVisible((v) => !v)}>
-          <Icon.MoreVertical color="white" width={32} />
+          <Icon.MoreVertical color="yellow" width={32} />
         </TouchableOpacity>
       </View>
       <MenuDrawer visible={menuVisible} onClose={() => setMenuVisible(false)} />
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 12,
     paddingHorizontal: 8,
-    backgroundColor: '#6200ee',
+    backgroundColor: Theme.primaryColor
   },
   icon: {
     width: 24,

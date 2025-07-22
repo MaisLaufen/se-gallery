@@ -12,7 +12,7 @@ interface Props {
 export const SearchBar = ({ value, onChangeText, onSubmit, onFilterPress }: Props) => {
   return (
     <View style={styles.container}>
-      <Icon.Search color="black" width={20} />
+      <Icon.Search width={20} style={styles.icon}/>
       <TextInput
         style={styles.input}
         placeholder="Поиск"
@@ -23,7 +23,7 @@ export const SearchBar = ({ value, onChangeText, onSubmit, onFilterPress }: Prop
         returnKeyType="search"
       />
       <TouchableOpacity onPress={onFilterPress}>
-        <Icon.Filter color="black" width={20} />
+        <Icon.Filter width={20} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -38,16 +38,17 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     paddingHorizontal: 12,
     marginHorizontal: 8,
-    height: 36,
+    height: 40,
   },
   icon: {
-    width: 20,
-    height: 20,
-    tintColor: '#888',
+    marginHorizontal: 4,
+    color: 'black'
   },
   input: {
     flex: 1,
-    marginHorizontal: 8,
+    fontSize: 16,
+    height: 40,
     color: '#000',
+    paddingVertical: 0, // убираем внутренние отступы, которые мешают
   },
 });
