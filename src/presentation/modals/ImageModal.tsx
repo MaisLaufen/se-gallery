@@ -1,29 +1,24 @@
 import React from 'react';
-import { Modal, StyleSheet } from 'react-native';
+import { Modal } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { ImageModel as ImageModel } from '../../domain/models/image';
+import { Theme } from '../theme';
 
 interface Props {
-  images: ImageModel[];
-  startIndex: number;
+  imageUrl: string;
   onClose: () => void;
 }
 
-export const ImageModal = ({ images, startIndex, onClose }: Props) => {
-  const zoomImages = images.map((img) => ({
-    url: img.imageUrl,
-  }));
-
+export const ImageModal = ({ imageUrl, onClose }: Props) => {
   return (
     <Modal visible={true} transparent={true} onRequestClose={onClose}>
       <ImageViewer
-        imageUrls={zoomImages}
-        index={startIndex}
+        imageUrls={[{ url: imageUrl }]}
+        index={0}
         onSwipeDown={onClose}
         enableSwipeDown={true}
         onCancel={onClose}
         saveToLocalByLongPress={false}
-        backgroundColor="black"
+        backgroundColor={Theme.primaryColor}
       />
     </Modal>
   );

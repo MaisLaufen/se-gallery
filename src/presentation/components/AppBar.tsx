@@ -26,7 +26,7 @@ export const AppBar = ({
       <HeaderLogo />
       <View style={styles.container}>
         <TouchableOpacity onPress={onRefresh}>
-          <Icon.RotateCw color="white" width={32} />
+          <Icon.RotateCw color={Theme.secondaryColor} width={32} />
         </TouchableOpacity>
         <SearchBar
           value={searchValue}
@@ -35,7 +35,7 @@ export const AppBar = ({
           onFilterPress={onFilterPress}
         />
         <TouchableOpacity onPress={() => setMenuVisible((v) => !v)}>
-          <Icon.MoreVertical color="yellow" width={32} />
+          <Icon.MoreVertical color={Theme.tertiaryColor} width={32} />
         </TouchableOpacity>
       </View>
       <MenuDrawer visible={menuVisible} onClose={() => setMenuVisible(false)} />
@@ -51,10 +51,5 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
     paddingHorizontal: 8,
     backgroundColor: Theme.primaryColor
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    tintColor: 'white',
-  },
+  }
 });

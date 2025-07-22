@@ -7,6 +7,7 @@ import {
   Pressable,
 } from 'react-native';
 import { ImageModel as ImageModel } from '../../domain/models/image';
+import { Theme } from '../theme';
 
 interface Props {
   image: ImageModel;
@@ -20,7 +21,7 @@ export const ImageCard = ({ image, onPress }: Props) => {
     <Pressable style={styles.card} onPress={onPress}>
       {loading && (
         <View style={styles.loader}>
-          <ActivityIndicator size="small" color="yellow" />
+          <ActivityIndicator size="small" color={Theme.tertiaryColor} />
         </View>
       )}
       <Image
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     margin: 2,
     overflow: 'hidden',
-    backgroundColor: 'black',
+    backgroundColor: Theme.primaryColor,
     position: 'relative',
   },
   img: {

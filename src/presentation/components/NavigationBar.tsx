@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Modal } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Theme } from '../theme';
 
 interface Props {
   currentPage: number;
@@ -37,16 +38,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 1,
-    backgroundColor: '#000000',
+    backgroundColor: Theme.primaryColor,
   },
   page: {
     marginHorizontal: 8,
     fontSize: 18,
-    color: '#ffffff',
+    color: Theme.secondaryColor,
   },
   current: {
     fontWeight: 'bold',
-    color: 'yellow',
+    color: Theme.tertiaryColor,
     textDecorationLine: 'underline',
   },
 });

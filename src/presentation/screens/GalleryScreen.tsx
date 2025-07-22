@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  StyleSheet,
+  StyleSheet
 }
 from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { fetchPopularImages, fetchFilteredImages } from '../../domain/useCases/fetchPopularImages';
+import { fetchFilteredImages } from '../../domain/useCases/fetchPopularImages';
 import { ImageModel } from '../../domain/models/image';
 import { ImageGrid } from '../components/ImageGrid';
 import { AppBar } from '../components/AppBar';
@@ -16,6 +16,7 @@ import { RootStackParamList } from '../../domain/navigation/navigation';
 import { FilterModal } from '../modals/FilterModal';
 import { ErrorModal } from '../modals/ErrorModal';
 import { PaginationBar } from '../components/NavigationBar';
+import { Theme } from '../theme';
 
 const IMAGES_PER_PAGE = 30;
 
@@ -32,20 +33,20 @@ export const GalleryScreen = () => {
   const [sortOrder, setSortOrder] = useState<'popular' | 'latest'>('popular');
 
 const toggleColor = (color: string) => {
+      setPage(1);
     setSelectedColors((prev) =>
       prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
     );
   };
 
   const toggleSortOrder = () => {
+    setPage(1);
     setSortOrder((prev) => (prev === 'popular' ? 'latest' : 'popular'));
   };
 
   const loadImages = async (reset = false) => {
     if (loading) return;
     setLoading(true);
-    console.log('Curr page: \n');
-    console.log(currentPage);
     try {
       const newImages = await fetchFilteredImages({
         query: query,
@@ -72,6 +73,7 @@ const toggleColor = (color: string) => {
 
     const onSearchSubmit = () => {
     setPage(1);
+    loadImages(true);
     };
 
   useEffect(() => {
@@ -81,12 +83,12 @@ const toggleColor = (color: string) => {
   return (
     <SafeAreaView style={styles.container}>
       <AppBar
-  onRefresh={() => loadImages(true)}
-  searchValue={query}
-  onSearchChange={setQuery}
-  onSearchSubmit={onSearchSubmit}
-  onFilterPress={() => setFilterVisible(true)}
-/>
+        onRefresh={() => loadImages(true)}
+        searchValue={query}
+        onSearchChange={setQuery}
+        onSearchSubmit={onSearchSubmit}
+        onFilterPress={() => setFilterVisible(true)}
+      />
 <FilterModal
   visible={filterVisible}
   onClose={() => setFilterVisible(false)}
@@ -97,9 +99,9 @@ const toggleColor = (color: string) => {
 />
       <View style={styles.flex}>
         <ImageGrid images={images} loadingMore={loading} onImagePress={(image) => navigation.navigate('ImageDetail', { image })}/>
-        <PaginationBar currentPage={currentPage} onPageChange={(newPage) => {
-            setPage(newPage);
-          }}></PaginationBar>
+        <PaginationBar currentPage={currentPage}
+          onPageChange={(newPage) => {setPage(newPage)}}>
+        </PaginationBar>
       </View>
       <ErrorModal
         visible={!!error}
@@ -113,7 +115,7 @@ const toggleColor = (color: string) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: Theme.primaryColor
   },
   flex: {
     flex: 1,

@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Icon from "react-native-feather";
+import { Theme } from '../theme';
 
 interface Props {
   value: string;
@@ -16,7 +17,7 @@ export const SearchBar = ({ value, onChangeText, onSubmit, onFilterPress }: Prop
       <TextInput
         style={styles.input}
         placeholder="Поиск"
-        placeholderTextColor="#666"
+        placeholderTextColor={Theme.placeholderColor}
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmit}
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Theme.secondaryColor,
     borderRadius: 24,
     paddingHorizontal: 12,
     marginHorizontal: 8,
@@ -42,13 +43,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginHorizontal: 4,
-    color: 'black'
+    color: Theme.primaryColor
   },
   input: {
     flex: 1,
     fontSize: 16,
     height: 40,
-    color: '#000',
-    paddingVertical: 0, // убираем внутренние отступы, которые мешают
+    color: Theme.primaryColor,
+    paddingVertical: 0, // для центрирования текста
   },
 });

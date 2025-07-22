@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
+import { Theme } from '../theme';
 
 const { width } = Dimensions.get('window');
 
@@ -46,7 +47,7 @@ export const MenuDrawer = ({ visible, onClose }: Props) => {
       <Animated.View style={[styles.drawer, { left: slideAnim }]}>
         <Text style={styles.text}>Меню заглушка</Text>
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-          <Text style={styles.closeText}>Закрыть</Text>
+          <Text>Закрыть</Text>
         </TouchableOpacity>
       </Animated.View>
     </View>
@@ -61,17 +62,12 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)', // затемнение и блокировка фона
+    backgroundColor: Theme.transparentBlack, // затемнение и блокировка фона
   },
   drawer: {
     width: width * 0.6,
     height: '100%',
-    backgroundColor: '#000000',
-    elevation: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: -2, height: 0 },
-    shadowRadius: 5,
+    backgroundColor: Theme.primaryColor,
     padding: 16,
     position: 'absolute',
     top: 0,
@@ -84,11 +80,8 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#eee',
+    backgroundColor: Theme.secondaryColor,
     alignSelf: 'flex-start',
     borderRadius: 6,
-  },
-  closeText: {
-    fontWeight: 'bold',
-  },
+  }
 });

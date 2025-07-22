@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Theme } from '../theme';
 
 export const HeaderLogo = () => {
   return (
@@ -21,16 +22,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: '#000000',
+    backgroundColor: Theme.primaryColor
   },
   logo: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 18
   },
   yellow: {
-    color: 'yellow',
+    color: Theme.tertiaryColor
   },
   white: {
-    color: 'white',
+    color: Theme.secondaryColor
   }
 });

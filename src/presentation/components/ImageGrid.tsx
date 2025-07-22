@@ -1,18 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import {
   FlatList,
   StyleSheet,
   View,
   ActivityIndicator,
-  PanResponder,
   Text,
-  Animated,
   Dimensions,
 } from 'react-native';
 import { ImageModel as ImageModel } from '../../domain/models/image';
 import { ImageCard } from './ImageCard';
-
-const windowHeight = Dimensions.get('window').height;
+import { Theme } from '../theme';
 
 interface Props {
   images: ImageModel[];
@@ -40,7 +37,7 @@ export const ImageGrid = ({ images, loadingMore, onImagePress }: Props) => {
 
       {loadingMore && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="yellow" />
+          <ActivityIndicator size="large" color={Theme.tertiaryColor} />
           <Text style={styles.loadingText}>Загрузка...</Text>
         </View>
       )}
@@ -64,12 +61,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    backgroundColor: Theme.transparentBlack,
     zIndex: 10,
   },
   loadingText: {
     marginTop: 8,
     fontSize: 20,
-    color: 'white',
+    color: Theme.secondaryColor,
   },
 });

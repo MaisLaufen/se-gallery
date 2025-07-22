@@ -1,10 +1,14 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { Dimensions, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react';
-import Feather from 'react-native-vector-icons/Feather';
 import { RootStackParamList } from '../../domain/navigation/navigation';
 import { HeaderLogo } from '../components/HeaderLogo';
+import { ImageModal } from '../modals/ImageModal';
+import { ImageDetailAppBar } from '../components/ImageDetailAppBar';
+import { AuthorInfoOverlay } from '../components/AuthorInfoOverlay';
+import * as Icon from "react-native-feather";
+import { Theme } from '../theme';
 
 type ImageDetailRouteProp = RouteProp<RootStackParamList, 'ImageDetail'>;
 
@@ -18,9 +22,10 @@ export const ImageDetailScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{flex: 1}}>
       <HeaderLogo />
+      <ImageDetailAppBar imageId={image.id}></ImageDetailAppBar>
 
-      {/* Картинка с кликом */}
       <TouchableOpacity onPress={() => setModalVisible(true)}>
         <Image
           source={{ uri: image.imageUrl }}
@@ -29,42 +34,30 @@ export const ImageDetailScreen = () => {
         />
       </TouchableOpacity>
 
-      <View style={styles.infoRow}>
-        <View style={styles.iconWithText}>
-          <Feather name="eye" size={20} color="#555" />
-          <Text style={styles.text}>{image.views}</Text>
-        </View>
-        <TouchableOpacity style={styles.iconWithText}>
-          <Feather name="heart" size={20} color="#e63946" />
-          <Text style={styles.text}>{image.likes}</Text>
-        </TouchableOpacity>
-      </View>
+      <AuthorInfoOverlay user={image.user} userUrl={image.userImageURL}></AuthorInfoOverlay>
 
       <Text style={styles.tags}>
         {image.tags.split(',').map(tag => `#${tag.trim()}`).join(' ')}
       </Text>
+      </View>
 
-      <Text style={styles.tags}>{image.user}</Text>
+      <View style={styles.infoRow}>
+        <View style={styles.iconWithText}>
+          <Icon.Eye width={20} color={Theme.tertiaryColor} />
+          <Text style={styles.text}>{image.views}</Text>
+        </View>
+        <View style={styles.iconWithText}>
+          <Icon.Heart width={20} color={Theme.like} />
+          <Text style={styles.text}>{image.likes}</Text>
+        </View>
+      </View>
 
-      {/* Модальное окно */}
-      <Modal
-        visible={modalVisible}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <TouchableOpacity
-          style={styles.modalContainer}
-          activeOpacity={1}
-          onPressOut={() => setModalVisible(false)}
-        >
-          <Image
-            source={{ uri: image.imageUrl }}
-            style={styles.modalImage}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </Modal>
+      {modalVisible && (
+  <ImageModal
+    imageUrl={image.imageUrl}
+    onClose={() => setModalVisible(false)}
+  />
+)}
     </SafeAreaView>
   );
 };
@@ -72,7 +65,7 @@ export const ImageDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: Theme.primaryColor,
   },
   image: {
     width: screenWidth,
@@ -83,6 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 16,
     alignItems: 'center',
+    verticalAlign: 'bottom'
   },
   iconWithText: {
     flexDirection: 'row',
@@ -91,22 +85,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: '#ccc',
+    color: Theme.secondaryColor
   },
   tags: {
+    paddingVertical: 16,
     paddingHorizontal: 16,
+    alignSelf: 'center',
     fontSize: 16,
-    color: '#bbb',
+    color: Theme.info,
     flexWrap: 'wrap',
-  },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.95)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalImage: {
-    width: '100%',
-    height: '100%',
-  },
+  }
 });
