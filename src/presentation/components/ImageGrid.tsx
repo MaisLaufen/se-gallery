@@ -17,12 +17,12 @@ const windowHeight = Dimensions.get('window').height;
 interface Props {
   images: ImageModel[];
   loadingMore: boolean;
-  navigation: any;
+  onImagePress: (image: ImageModel) => void;
 }
 
-export const ImageGrid = ({ images, loadingMore, navigation }: Props) => {
+export const ImageGrid = ({ images, loadingMore, onImagePress }: Props) => {
   return (
-    <>
+    <View style={styles.container}>
       <FlatList
         data={images}
         keyExtractor={(item) => item.id}
@@ -30,7 +30,7 @@ export const ImageGrid = ({ images, loadingMore, navigation }: Props) => {
         renderItem={({ item }) => (
           <ImageCard
             image={item}
-            onPress={() => navigation.navigate('ImageDetail', { image: item })}
+            onPress={() => onImagePress(item)}
           />
         )}
         contentContainerStyle={styles.list}
@@ -39,32 +39,37 @@ export const ImageGrid = ({ images, loadingMore, navigation }: Props) => {
       />
 
       {loadingMore && (
-        <View style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: windowHeight,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'black', // полупрозрачный фон для затемнения
-          zIndex: 1000,
-        }}>
-          <ActivityIndicator size="large" color='yellow' />
-          <Text style={{ marginTop: 8, fontSize: 20 }}>Загрузка...</Text>
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="yellow" />
+          <Text style={styles.loadingText}>Загрузка...</Text>
         </View>
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative', // позиционирование оверлея (не закрывать навигацию)
+  },
   list: {
     padding: 2,
     gap: 1,
   },
   row: {
     justifyContent: 'space-between',
+  },
+  loadingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    zIndex: 10,
+  },
+  loadingText: {
+    marginTop: 8,
+    fontSize: 20,
+    color: 'white',
   },
 });
