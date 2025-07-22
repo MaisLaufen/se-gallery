@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     padding: 16,
   },
   section: {
-    marginVertical: 12,
+    marginVertical: 12
   },
   label: {
     fontSize: 16,
@@ -17,10 +17,15 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: Theme.primaryColor,
+    color: Theme.secondaryColor,
+    textAlign: 'center'
+  },
+  textDep: {
+    fontSize: 16
   },
   link: {
     color: Theme.href,
     textDecorationLine: 'underline',
+    textAlign: 'center'
   },
 });

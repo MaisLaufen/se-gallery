@@ -1,29 +1,42 @@
 import React from 'react';
-import { View, Text, Linking, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { SecondaryAppBar } from '../../components/SecondaryAppBar/SecondaryAppBar';
 import { styles } from './styles';
-import { Theme } from '../../theme';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../domain/navigation/navigation';
-
-type Navigation = NativeStackNavigationProp<RootStackParamList>;
+import { HeaderLogo } from '../../components/HeaderLogo/HeaderLogo';
 
 export const AboutScreen = () => {
-  const navigation = useNavigation<Navigation>();
 
-  return (
+    type Navigation = NativeStackNavigationProp<RootStackParamList>;
+    const navigation = useNavigation<Navigation>();
+
+    return (
     <SafeAreaView style={styles.container}>
+        <HeaderLogo/>
       <SecondaryAppBar
         appBarText="О приложении"
         onNavigateSettings={() => navigation.navigate('Settings')}
         onNavigateAbout={() => {}}
       />
 
+      <View style={{ alignItems: 'center', marginVertical: 20 }}>
+        <Image
+          source={require('../../../../assets/logo.png')}
+          style={{height: 250, resizeMode: 'contain' }}
+        />
+      </View>
+
       <View style={styles.section}>
-        <Text style={styles.text}>Приложение Pintretest</Text>
-        <Text style={styles.text}>Версия: 1.0.0</Text>
+        <Text style={styles.text}>Pintretest ver. 1.0.0</Text>
       </View>
 
       <View style={styles.section}>
@@ -33,9 +46,25 @@ export const AboutScreen = () => {
       </View>
 
       <View style={styles.section}>
-        <TouchableOpacity onPress={() => Linking.openURL('https://github.com/your_repo')}>
-          <Text style={[styles.link, styles.text]}>GitHub проекта</Text>
+        <Text style={[styles.text, { fontWeight: 'bold', marginBottom: 8 }]}>
+          Версии используемых технологий:
+        </Text>
+        <Text style={styles.text}>JDK - 17.0.12</Text>
+        <Text style={styles.text}>SDK - 34</Text>
+        <Text style={styles.text}>NDK - 29</Text>
+        <Text style={styles.text}>React Native - 0.80.1</Text>
+        <Text style={styles.text}>Metro - 0.82.5</Text>
+
+      </View>
+
+      <View style={[styles.section, { marginTop: 30 }]}>
+        <TouchableOpacity onPress={() => Linking.openURL('https://github.com/MaisLaufen/se-gallery')}>
+          <Text style={[styles.link]}>Репозиторий</Text>
         </TouchableOpacity>
+      </View>
+
+      <View style={{ alignItems: 'center', marginTop: 'auto', paddingVertical: 10 }}>
+        <Text style={styles.text}>[SE] Gallery 1.0.0</Text>
       </View>
     </SafeAreaView>
   );

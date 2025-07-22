@@ -7,20 +7,17 @@ export const styles = StyleSheet.create({
     backgroundColor: Theme.primaryColor,
     padding: 16,
   },
+  centerWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   section: {
     marginVertical: 12,
   },
   label: {
     fontSize: 16,
-    color: Theme.primaryColor,
+    color: Theme.secondaryColor,
     marginBottom: 8,
-  },
-  text: {
-    fontSize: 16,
-    color: Theme.primaryColor,
-  },
-  link: {
-    color: Theme.href,
-    textDecorationLine: 'underline',
-  },
+  }
 });
